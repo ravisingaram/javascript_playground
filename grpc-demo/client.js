@@ -8,16 +8,16 @@ const text = process.argv[2];
 
 const client = new todoPackage.Todo("localhost:40000", 
 grpc.credentials.createInsecure())
-console.log(text)
+//console.log(text)
 
-client.createTodo({
-    "id": -1,
-    "text": text
-}, (err, response) => {
+// client.createTodo({
+//     "id": -1,
+//     "text": text
+// }, (err, response) => {
 
-    console.log("Recieved from server " + JSON.stringify(response))
+//     console.log("Recieved from server " + JSON.stringify(response))
 
-})
+// })
 /*
 client.readTodos(null, (err, response) => {
 
@@ -27,9 +27,15 @@ client.readTodos(null, (err, response) => {
 })
 */
 
-const call = client.readTodosStream();
-call.on("data", item => {
-    console.log("received item from server " + JSON.stringify(item))
+// const call = client.readTodosStream();
+// call.on("data", item => {
+//     console.log("received item from server " + JSON.stringify(item))
+// })
+
+// call.on("end", e => console.log("server done!"))
+
+client.createprompt(null, (err,response) => {
+    
+   console.log ("Server asks" + JSON.stringify(response))
 })
 
-call.on("end", e => console.log("server done!"))

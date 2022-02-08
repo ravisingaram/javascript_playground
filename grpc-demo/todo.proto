@@ -6,7 +6,7 @@ service Todo {
     rpc createTodo(TodoItem) returns (TodoItem);
     rpc readTodos(voidNoParam) returns (TodoItems);
     rpc readTodosStream(voidNoParam) returns (stream TodoItem);
-
+    rpc createprompt(voidNoParam) returns (prompt1);
 }
 
 message voidNoParam {}
@@ -18,4 +18,8 @@ message TodoItem {
 
 message TodoItems {
     repeated TodoItem items = 1;
+}
+
+message prompt1 {
+    string Qn1 = 1;
 }
