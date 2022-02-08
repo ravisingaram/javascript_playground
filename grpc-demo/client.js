@@ -4,7 +4,9 @@ const packageDef = protoLoader.loadSync("todo.proto", {});
 const grpcObject = grpc.loadPackageDefinition(packageDef);
 const todoPackage = grpcObject.todoPackage;
 
-const text = process.argv[2];
+//const text = process.argv[2];
+
+
 
 const client = new todoPackage.Todo("localhost:40000", 
 grpc.credentials.createInsecure())
@@ -34,8 +36,28 @@ client.readTodos(null, (err, response) => {
 
 // call.on("end", e => console.log("server done!"))
 
-client.createprompt(null, (err,response) => {
+client.createPrompt(null, (err,response) => {
     
-   console.log ("Server asks" + JSON.stringify(response))
+    //console.log("Server asks " + JSON.stringify(response))
+    const readline = require('readline-sync');
+    options = readline.question(response.Qn1);
+    //console.log(options)
+    client.optionSelection({
+
+        "options": options
+    }, (err, response) => {
+            selection = readline.question(response.category);
+            client.choice({
+                "options": options,
+                "selection": selection
+            }, (err, response) => {
+                console.log("your order for " + response.output + " is placed. We will get it to you soon ")
+            }
+            )
+    }
+    )
+   
 })
+
+
 

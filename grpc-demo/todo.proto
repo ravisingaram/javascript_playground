@@ -6,7 +6,10 @@ service Todo {
     rpc createTodo(TodoItem) returns (TodoItem);
     rpc readTodos(voidNoParam) returns (TodoItems);
     rpc readTodosStream(voidNoParam) returns (stream TodoItem);
-    rpc createprompt(voidNoParam) returns (prompt1);
+    rpc createPrompt(voidNoParam) returns (prompt1);
+    rpc optionSelection(option) returns (result);
+    rpc choice(secondSelection) returns(orderConformation);
+    
 }
 
 message voidNoParam {}
@@ -22,4 +25,20 @@ message TodoItems {
 
 message prompt1 {
     string Qn1 = 1;
+}
+
+message option {
+    string options = 1;
+}
+
+message result { 
+    string category = 1;
+}
+
+message secondSelection {
+    string options = 1;
+    string selection = 2;
+}
+message orderConformation {
+    string output = 1;
 }
